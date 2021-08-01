@@ -224,7 +224,7 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)
 		return
 
@@ -252,7 +252,7 @@
 	if(!check_rights(R_ADMIN|R_MOD))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 
 	if (!msg)
 		return
@@ -281,7 +281,7 @@
 	if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 
 	if (!msg)
 		return

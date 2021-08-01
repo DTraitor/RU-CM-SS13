@@ -723,13 +723,13 @@ var/const/MAX_SAVE_SLOTS = 10
 				if("general")
 					var/msg = input(usr,"Give a physical description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 					if(msg != null)
-						msg = copytext(msg, 1, 256)
+						msg = copytext_char(msg, 1, 256)
 						msg = html_encode(msg)
 					flavor_texts[href_list["task"]] = msg
 				else
 					var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
 					if(msg != null)
-						msg = copytext(msg, 1, 256)
+						msg = copytext_char(msg, 1, 256)
 						msg = html_encode(msg)
 					flavor_texts[href_list["task"]] = msg
 			SetFlavorText(user)
@@ -747,7 +747,7 @@ var/const/MAX_SAVE_SLOTS = 10
 					var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
 
 					if(medmsg != null)
-						medmsg = copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
+						medmsg = copytext_char(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
 						medmsg = html_encode(medmsg)
 
 						med_record = medmsg
@@ -757,7 +757,7 @@ var/const/MAX_SAVE_SLOTS = 10
 					var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message
 
 					if(secmsg != null)
-						secmsg = copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
+						secmsg = copytext_char(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
 						secmsg = html_encode(secmsg)
 
 						sec_record = secmsg
@@ -766,7 +766,7 @@ var/const/MAX_SAVE_SLOTS = 10
 					var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
 
 					if(genmsg != null)
-						genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
+						genmsg = copytext_char(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
 						genmsg = html_encode(genmsg)
 
 						gen_record = genmsg

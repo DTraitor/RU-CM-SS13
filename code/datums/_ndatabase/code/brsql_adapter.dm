@@ -25,8 +25,8 @@
 #define BRSQL_COUNT_COLUMN_NAME "total"
 #define BRSQL_ROOT_NAME "__root"
 #define BRSQL_ROOT_ALIAS "T_root"
-#define COPY_FROM_START(T, loc) copytext(T, 1, loc)
-#define COPY_AFTER_FOUND(T, loc) copytext(T, loc+1)
+#define COPY_FROM_START(T, loc) copytext_char(T, 1, loc)
+#define COPY_AFTER_FOUND(T, loc) copytext_char(T, loc+1)
 
 /datum/db/adapter/brsql_adapter
 	var/list/issue_log

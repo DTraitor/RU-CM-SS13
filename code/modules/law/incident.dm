@@ -43,4 +43,4 @@
 	for(var/datum/law/L in charges)
 		charge_list += L.name
 		charge_list += ", "
-	return copytext(charge_list, 1, length(charge_list)-1)
+	return copytext_char(charge_list, 1, length(charge_list)-1)

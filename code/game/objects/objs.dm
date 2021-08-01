@@ -314,7 +314,7 @@
 
 // Adding a text string at the end of the object
 /obj/proc/add_label(var/obj/O, user)
-	var/label = copytext(reject_bad_text(input(user,"Label text?", "Set label", "")), 1, MAX_NAME_LEN)
+	var/label = copytext_char(reject_bad_text(input(user,"Label text?", "Set label", "")), 1, MAX_NAME_LEN)
 
 	// Checks for valid labelling/name length
 	if(!label || !length(label))

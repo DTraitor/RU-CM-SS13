@@ -21,7 +21,7 @@
 		return
 
 	if(copytext(message, 1, 2) == "*")
-		return emote(copytext(message, 2), player_caused = TRUE)
+		return emote(copytext_char(message, 2), player_caused = TRUE)
 
 	var/datum/language/speaking = null
 	if(length(message) >= 2)
@@ -31,7 +31,7 @@
 					verb = L.speech_verb
 					speaking = L
 					break
-		var/channel_prefix = copytext(message, 1, 3)
+		var/channel_prefix = copytext_char(message, 1, 3)
 		if(languages.len)
 			for(var/datum/language/L in languages)
 				if(lowertext(channel_prefix) == ":[L.key]" || lowertext(channel_prefix) == ".[L.key]")
@@ -58,9 +58,9 @@
 
 	if(speaking && !forced)
 		if (copytext(message,1,2) == ";")
-			message = trim(copytext(message,2))
+			message = trim(copytext_char(message,2))
 		else if (copytext(message,1,3) == ":q" || copytext(message,1,3) == ":Q")
-			message = trim(copytext(message,3))
+			message = trim(copytext_char(message,3))
 
 	message = capitalize(trim_left(message))
 

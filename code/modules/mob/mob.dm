@@ -349,7 +349,7 @@
 		if(length(msg) <= 40)
 			return SPAN_NOTICE("[msg]")
 		else
-			return SPAN_NOTICE("[copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>")
+			return SPAN_NOTICE("[copytext_char(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>")
 
 
 

@@ -96,7 +96,7 @@ var/list/department_radio_keys = list(
 
 	// Automatic punctuation
 	if (client && client.prefs && client.prefs.toggle_prefs & TOGGLE_AUTOMATIC_PUNCTUATION)
-		if (!(copytext(message, -1) in ENDING_PUNCT))
+		if (!(copytext_char(message, -1) in ENDING_PUNCT))
 			message += "."
 
 	if(SEND_SIGNAL(src, COMSIG_LIVING_SPEAK, message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol, nolog, message_mode) & COMPONENT_OVERRIDE_SPEAK) return

@@ -30,13 +30,13 @@
 	if(!usr || usr.stat || usr.lying)	return
 
 	if(scan)
-		to_chat(usr, "You remove \the [scan] from \the [src].")
+		to_chat(usr, "Вы извлекли \the [scan] из \the [src].")
 		scan.forceMove(get_turf(src))
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else
-		to_chat(usr, "There is nothing to remove from the console.")
+		to_chat(usr, "Нечего извлекать из консоли.")
 	return
 
 /obj/structure/machinery/computer/secure_data/attackby(obj/item/O as obj, user as mob)
@@ -44,18 +44,18 @@
 		if(usr.drop_held_item())
 			O.forceMove(src)
 			scan = O
-			to_chat(user, "You insert [O].")
+			to_chat(user, "Вы вставили [O].")
 
 	if(istype(O, /obj/item/device/clue_scanner) && !scanner)
 		var/obj/item/device/clue_scanner/S = O
 		if(!S.found_prints)
-			to_chat(user, "No prints")
+			to_chat(user, "Нет распечаток")
 			return
 
 		if(usr.drop_held_item())
 			O.forceMove(src)
 			scanner = O
-			to_chat(user, "You insert [O].")
+			to_chat(user, "Вы вставили [O].")
 
 	..()
 
@@ -68,21 +68,21 @@
 		return
 
 	if(!is_mainship_level(z))
-		to_chat(user, SPAN_DANGER("<b>Unable to establish a connection</b>: \black You're too far away from the station!"))
+		to_chat(user, SPAN_DANGER("<b>Не удалось установить соединение</b>: \black Вы слишком далеко от судна!"))
 		return
 	var/dat
 
 	if (temp)
-		dat = text("<TT>[]</TT><BR><BR><A href='?src=\ref[];choice=Clear Screen'>Clear Screen</A>", temp, src)
+		dat = text("<TT>[]</TT><BR><BR><A href='?src=\ref[];choice=Clear Screen'>Очистить экран</A>", temp, src)
 	else
 		switch(screen)
 			if(1.0)
 				dat += {"
 <p style='text-align:center;'>"}
-				dat += text("<A href='?src=\ref[];choice=Search Records'>Search Records</A><BR>", src)
-				dat += text("<A href='?src=\ref[];choice=New Record (General)'>New Record</A><BR>", src)
+				dat += text("<A href='?src=\ref[];choice=Search Records'>Поиск записей</A><BR>", src)
+				dat += text("<A href='?src=\ref[];choice=New Record (General)'>Новая запись</A><BR>", src)
 				if(scanner)
-					dat += text("<A href='?src=\ref[];choice=read_fingerprint'>Read Fingerprint</A><BR>", src)
+					dat += text("<A href='?src=\ref[];choice=read_fingerprint'>Увидеть отпечатки</A><BR>", src)
 				dat += {"
 </p>
 <table style="text-align:center;" cellspacing="0" width="100%">
@@ -121,31 +121,31 @@
 						dat += text("<td>[]</td>", R.fields["rank"])
 						dat += text("<td>[]</td></tr>", crimstat)
 					dat += "</table><hr width='75%' />"
-				dat += text("<A href='?src=\ref[];choice=Record Maintenance'>Record Maintenance</A><br><br>", src)
+				dat += text("<A href='?src=\ref[];choice=Record Maintenance'>Служебная страница</A><br><br>", src)
 			if(2.0)
-				dat += "<B>Records Maintenance</B><HR>"
-				dat += "<BR><A href='?src=\ref[src];choice=Delete All Records'>Delete All Records</A><BR><BR><A href='?src=\ref[src];choice=Return'>Back</A>"
+				dat += "<B>Служебная страница</B><HR>"
+				dat += "<BR><A href='?src=\ref[src];choice=Delete All Records'>Удалить все записи</A><BR><BR><A href='?src=\ref[src];choice=Return'>Обратно</A>"
 			if(3.0)
-				dat += "<CENTER><B>Security Record</B></CENTER><BR>"
+				dat += "<CENTER><B>Записи Службы Безопасности</B></CENTER><BR>"
 				if ((istype(active1, /datum/data/record) && GLOB.data_core.general.Find(active1)))
 					dat += text("<table><tr><td>	\
-					Name: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \
-					ID: [active1.fields["id"]]<BR>\n \
-					Sex: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
-					Age: <A href='?src=\ref[src];choice=Edit Field;field=age'>[active1.fields["age"]]</A><BR>\n	\
-					Rank: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
-					Physical Status: [active1.fields["p_stat"]]<BR>\n	\
-					Mental Status: [active1.fields["m_stat"]]<BR></td>	\
-					<td align = center valign = top>Photo:<br> \
-					<table><td align = center><img src=front.png height=80 width=80 border=4><BR><A href='?src=\ref[src];choice=Edit Field;field=photo front'>Update front photo</A></td> \
-					<td align = center><img src=side.png height=80 width=80 border=4><BR><A href='?src=\ref[src];choice=Edit Field;field=photo side'>Update side photo</A></td></table> \
+					Имя: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \
+					Идентификатор: [active1.fields["id"]]<BR>\n \
+					Пол: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
+					Возраст: <A href='?src=\ref[src];choice=Edit Field;field=age'>[active1.fields["age"]]</A><BR>\n	\
+					Должность: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
+					Физическое состояние: [active1.fields["p_stat"]]<BR>\n	\
+					Душевное здоровье: [active1.fields["m_stat"]]<BR></td>	\
+					<td align = center valign = top>Фото:<br> \
+					<table><td align = center><img src=front.png height=80 width=80 border=4><BR><A href='?src=\ref[src];choice=Edit Field;field=photo front'>Обновить фото спереди</A></td> \
+					<td align = center><img src=side.png height=80 width=80 border=4><BR><A href='?src=\ref[src];choice=Edit Field;field=photo side'>Обновить фото сбоку</A></td></table> \
 					</td></tr></table>")
 				else
-					dat += "<B>General Record Lost!</B><BR>"
+					dat += "<B>Потеряны общие записи!</B><BR>"
 				if ((istype(active2, /datum/data/record) && GLOB.data_core.security.Find(active2)))
-					dat += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\n \
-								Criminal Status: <A href='?src=\ref[];choice=Edit Field;field=criminal'>[]</A><BR> \n \
-								Incidents: [active2.fields["incident"]]<BR>\n \
+					dat += text("<BR>\n<CENTER><B>Данные СБ</B></CENTER><BR>\n \
+								Статус правонарушителя: <A href='?src=\ref[];choice=Edit Field;field=criminal'>[]</A><BR> \n \
+								Инцинденты: [active2.fields["incident"]]<BR>\n \
 								\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", \
 								src, active2.fields["criminal"])
 					if(islist(active2.fields["comments"]))
@@ -203,7 +203,7 @@
 								background = "'background-color:#1AAFFF;'"
 							if("")
 								background = ""
-								crimstat = "No Record."
+								crimstat = "Нет записи."
 						dat += text("<tr style=[]><td><A href='?src=\ref[];choice=Browse Record;d_rec=\ref[]'>[]</a></td>", background, src, R, R.fields["name"])
 						dat += text("<td>[]</td>", R.fields["id"])
 						dat += text("<td>[]</td>", R.fields["rank"])
@@ -273,7 +273,7 @@ What a mess.*/
 
 //RECORD FUNCTIONS
 			if("Search Records")
-				var/t1 = input("Search String: (Partial Name or ID or Rank)", "Secure. records", null, null)  as text
+				var/t1 = input("Строка поиска: (Имя, идентификатор или должность)", "SЗаписи Службы Безопасности", null, null)  as text
 				if ((!t1 || usr.stat || usr.is_mob_restrained() || !in_range(src, usr)))
 					return
 				Perp = new/list()
@@ -305,7 +305,7 @@ What a mess.*/
 				var/datum/data/record/R = locate(href_list["d_rec"])
 				var/S = locate(href_list["d_rec"])
 				if (!( GLOB.data_core.general.Find(R) ))
-					temp = "Record Not Found!"
+					temp = "Запись не найдена!"
 				else
 					for(var/datum/data/record/E in GLOB.data_core.security)
 						if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
@@ -326,7 +326,7 @@ What a mess.*/
 						record2 = active2
 					sleep(50)
 					var/obj/item/paper/P = new /obj/item/paper( loc )
-					P.info = "<CENTER><B>Security Record</B></CENTER><BR>"
+					P.info = "<CENTER><B>Запись СБ</B></CENTER><BR>"
 					if (record1)
 						P.info += text("Name: []<br />\nID: []<br />\nSex: []<br />\nAge: []<br />\nRank: []<br />\nPhysical Status: []<br />\nMental Status: []<br />Criminal Status: []<br />", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["rank"], record1.fields["p_stat"], record1.fields["m_stat"], record2.fields["criminal"])
 						P.name = text("Security Record ([])", record1.fields["name"])
@@ -334,7 +334,7 @@ What a mess.*/
 						P.info += "<b>General Record Lost!</b><br />"
 						P.name = "Security Record"
 					if (record2)
-						P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nIncidents: [record2.fields["incident"]]<BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>")
+						P.info += text("<BR>\n<CENTER><B>Записи СБ</B></CENTER><BR>\nИнцинденты: [record2.fields["incident"]]<BR>\n<BR>\n<CENTER><B>Комментарии/Отчёт</B></CENTER><BR>")
 						if(islist(record2.fields["comments"]) || length(record2.fields["comments"]) > 0)
 							for(var/com_i in record2.fields["comments"])
 								var/comment = record2.fields["comments"][com_i]
@@ -345,18 +345,18 @@ What a mess.*/
 									comment_markup += text("<i>Comment deleted by [] at []</i>", comment["deleted_by"], comment["deleted_at"])
 								P.info += "[comment_markup]<br /><br />"
 						else
-							P.info += text("<b>No comments</b><br />")
+							P.info += text("<b>Нет комментариев</b><br />")
 					else
-						P.info += "<B>Security Record Lost!</B><BR>"
+						P.info += "<B>Записи потеряны!</B><BR>"
 					P.info += "</TT>"
 					printing = null
 					updateUsrDialog()
 //RECORD DELETE
 			if ("Delete All Records")
 				temp = ""
-				temp += "Are you sure you wish to delete all Security records?<br>"
-				temp += "<a href='?src=\ref[src];choice=Purge All Records'>Yes</a><br>"
-				temp += "<a href='?src=\ref[src];choice=Clear Screen'>No</a>"
+				temp += "Вы уверены, что хотите удалить все записи из базы Службы Безопасности?<br>"
+				temp += "<a href='?src=\ref[src];choice=Purge All Records'>Да</a><br>"
+				temp += "<a href='?src=\ref[src];choice=Clear Screen'>Нет</a>"
 
 			if ("Purge All Records")
 				for(var/datum/data/record/R in GLOB.data_core.security)
@@ -368,7 +368,7 @@ What a mess.*/
 				if (!(istype(active2, /datum/data/record)))
 					return
 				var/a2 = active2
-				var/t1 = copytext(trim(strip_html(input("Your name and time will be added to this new comment.", "Add a comment", null, null)  as message)),1,MAX_MESSAGE_LEN)
+				var/t1 = copytext_char(trim(strip_html(input("Ваше имя и время записи будут добавлены к этому комментарию.", "Добавить новый комментарий", null, null) as message)),1,MAX_MESSAGE_LEN)
 				if((!t1 || usr.stat || usr.is_mob_restrained() || (!in_range(src, usr) && (!ishighersilicon(usr))) || active2 != a2))
 					return
 				var/created_at = text("[]&nbsp;&nbsp;[]&nbsp;&nbsp;[]", time2text(world.realtime, "MMM DD"), time2text(world.time, "[worldtime2text()]:ss"), game_year)
@@ -401,7 +401,7 @@ What a mess.*/
 					updated_comments[href_list["del_c"]]["deleted_by"] = deleter
 					updated_comments[href_list["del_c"]]["deleted_at"] = text("[]&nbsp;&nbsp;[]&nbsp;&nbsp;[]", time2text(world.realtime, "MMM DD"), time2text(world.time, "[worldtime2text()]:ss"), game_year)
 					active2.fields["comments"] = updated_comments
-					to_chat(usr, text("You have deleted a comment from the Security Record of [].", active2.fields["name"]))
+					to_chat(usr, text("Вы удалили комментарий из базы Службы Безопасности [].", active2.fields["name"]))
 //RECORD CREATE
 			if ("New Record (Security)")
 				if ((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
@@ -420,33 +420,33 @@ What a mess.*/
 				switch(href_list["field"])
 					if("name")
 						if (istype(active1, /datum/data/record))
-							var/t1 = reject_bad_name(input(usr, "Please input name:", "Secure. records", active1.fields["name"]) as text|null)
+							var/t1 = reject_bad_name(input(usr, "Пожалуйста, введите имя:", "Записи Службы Безопасности", active1.fields["name"]) as text|null)
 							if (!t1 || active1 != a1)
 								return
 							active1.fields["name"] = t1
 					if("sex")
 						if (istype(active1, /datum/data/record))
-							if (active1.fields["sex"] == "Male")
-								active1.fields["sex"] = "Female"
+							if (active1.fields["sex"] == "Мужской")
+								active1.fields["sex"] = "Женский"
 							else
-								active1.fields["sex"] = "Male"
+								active1.fields["sex"] = "Мужской"
 					if("age")
 						if (istype(active1, /datum/data/record))
-							var/t1 = input("Please input age:", "Secure. records", active1.fields["age"], null)  as num
+							var/t1 = input("Пожалуйста, введите возраст:", "Записи Службы Безопасности", active1.fields["age"], null)  as num
 							if (!t1 || active1 != a1)
 								return
 							active1.fields["age"] = t1
 					if("criminal")
 						if (istype(active2, /datum/data/record))
-							temp = "<h5>Criminal Status:</h5>"
+							temp = "<h5>Статус правонарушителя:</h5>"
 							temp += "<ul>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=none'>None</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=arrest'>*Arrest*</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=incarcerated'>Incarcerated</a></li>"
-							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
+							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=none'>Отсутствует</a></li>"
+							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=arrest'>*Арест*</a></li>"
+							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=incarcerated'>В заключении</a></li>"
+							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Отпущен</a></li>"
 							temp += "</ul>"
 					if("rank")
-						var/list/L = list( "Head of Personnel", "Captain", "AI" )
+						var/list/L = list("Head of Personnel", "Captain", "AI")
 						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
 						if ((istype(active1, /datum/data/record) && L.Find(rank)))
 							temp = "<h5>Rank:</h5>"
@@ -455,10 +455,10 @@ What a mess.*/
 								temp += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
 							temp += "</ul>"
 						else
-							alert(usr, "You do not have the required rank to do this!")
+							alert(usr, "У вас нет необходимых для этого действия прав!")
 					if("species")
 						if (istype(active1, /datum/data/record))
-							var/t1 = copytext(trim(strip_html(input("Please enter race:", "General records", active1.fields["species"], null)  as message)),1,MAX_MESSAGE_LEN)
+							var/t1 = copytext_char(trim(strip_html(input("Пожалуйста, введите расу:", "Общие записи", active1.fields["species"], null)  as message)),1,MAX_MESSAGE_LEN)
 							if (!t1 || active1 != a1)
 								return
 							active1.fields["species"] = t1
@@ -478,13 +478,13 @@ What a mess.*/
 						if (active2)
 							switch(href_list["criminal2"])
 								if("none")
-									active2.fields["criminal"] = "None"
+									active2.fields["criminal"] = "Отсутствует"
 								if("arrest")
-									active2.fields["criminal"] = "*Arrest*"
+									active2.fields["criminal"] = "*Арест*"
 								if("incarcerated")
-									active2.fields["criminal"] = "Incarcerated"
+									active2.fields["criminal"] = "В заключении"
 								if("released")
-									active2.fields["criminal"] = "Released"
+									active2.fields["criminal"] = "Отпущен"
 
 							for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
 								H.sec_hud_set_security_status()
@@ -505,9 +505,9 @@ What a mess.*/
 	dat += "Description: [scanner.found_prints.description]<BR>"
 	dat += "</td></tr></table>"
 
-	dat += "<a href='?src=\ref[src];choice=print_report'>Print Evidence</a><BR>"
-	dat += "<a href='?src=\ref[src];choice=return_menu'>Return</a><BR>"
-	dat += "<a href='?src=\ref[src];choice=return_clear'>Clear Print and Return</a>"
+	dat += "<a href='?src=\ref[src];choice=print_report'>Распечатка по уликам</a><BR>"
+	dat += "<a href='?src=\ref[src];choice=return_menu'>Вернуться</a><BR>"
+	dat += "<a href='?src=\ref[src];choice=return_clear'>Очистить отчёт и вернуться</a>"
 
 	return dat
 
@@ -533,17 +533,17 @@ What a mess.*/
 		if(prob(10/severity))
 			switch(rand(1,6))
 				if(1)
-					R.fields["name"] = "[pick(pick(first_names_male), pick(first_names_female))] [pick(last_names)]"
+					R.fields["name"] = "[pick(pick(first_names_male), pick(first_names_female))] [pick(last_names)]" // TODO ANDRO: Dieser Fall ist witzlos, machen Sie ihn besser (Vielleicht sollte man Name des anderen Record entnehmen.)
 				if(2)
-					R.fields["sex"]	= pick("Male", "Female")
+					R.fields["sex"]	= pick("Мужской", "Женский")
 				if(3)
 					R.fields["age"] = rand(5, 85)
 				if(4)
-					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Released")
+					R.fields["criminal"] = pick("Отсутствует", "*Арест*", "В заключении", "Отпущен")
 				if(5)
-					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
+					R.fields["p_stat"] = pick("*Без сознания*", "Активен", "Физически недееспособен")
 				if(6)
-					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
+					R.fields["m_stat"] = pick("*Болен*", "*Нестабилен*", "*Под присмотром*", "Стабилен")
 			continue
 
 		else if(prob(1))

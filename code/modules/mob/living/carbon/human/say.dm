@@ -21,8 +21,8 @@
 
 	var/message_mode = parse_message_mode(message, "headset")
 
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2), 1, null, TRUE) //TRUE arg means emote was caused by player (e.g. no an auto scream when hurt).
+	if(copytext_char(message,1,2) == "*")
+		return emote(copytext_char(message,2), 1, null, TRUE) //TRUE arg means emote was caused by player (e.g. no an auto scream when hurt).
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
@@ -30,18 +30,18 @@
 	//parse the radio code and consume it
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
+			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
-			message = copytext(message,3)
+			message = copytext_char(message,3)
 
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if(speaking)
-		message = copytext(message,3)
+		message = copytext_char(message,3)
 	else
 		speaking = get_default_language()
 
-	var/ending = copytext(message, length(message))
+	var/ending = copytext_char(message, length(message))
 	if (speaking)
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
@@ -194,7 +194,7 @@
 
 /mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
 	var/verb = "says"
-	var/ending = copytext(message, length(message))
+	var/ending = copytext_char(message, length(message))
 
 	if(speaking)
 		verb = speaking.get_spoken_verb(ending)

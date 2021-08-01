@@ -177,7 +177,7 @@
 		return standard_mode
 
 	if(length(message) >= 2)
-		var/channel_prefix = copytext(message, 1 ,3)
+		var/channel_prefix = copytext_char(message, 1 ,3)
 		return department_radio_keys[channel_prefix]
 
 	return null
@@ -186,7 +186,7 @@
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
 	if(length(message) >= 2)
-		var/language_prefix = lowertext(copytext(message, 1 ,3))
+		var/language_prefix = lowertext(copytext_char(message, 1 ,3))
 		var/datum/language/L = GLOB.all_languages[GLOB.language_keys[language_prefix]]
 		if (can_speak(L))
 			return L
